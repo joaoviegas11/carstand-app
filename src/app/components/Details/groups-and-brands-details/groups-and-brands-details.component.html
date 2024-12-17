@@ -1,0 +1,90 @@
+<div>
+    <div class="absolute flex z-50 top-0 left-0 mt-24">
+        <app-go-back></app-go-back>
+    </div>
+    <div class="mt-28 container mx-auto px-4">
+        <div class="p-8 mb-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
+                <div class="flex flex-col items-start text-white space-y-4">
+                    <h1 class="text-5xl font-extrabold mb-4">
+                        {{ group ? group.name : brand?.name }}
+                    </h1>
+                    <p class="text-lg">
+                        <strong>Country: </strong>{{ group ? group.country : brand?.country }}
+                    </p>
+                    <p class="text-lg">
+                        <strong>Email: </strong>
+                        <a href="mailto:{{ group ? group.email : brand?.email }}" class="underline hover:text-gray-300">
+                            {{ group ? group.email : brand?.email }}
+                        </a>
+                    </p>
+                    <p class="text-lg">
+                        <strong>Website: </strong>
+                        <a href="{{ group ? group.website : brand?.website }}" target="_blank"
+                            class="underline hover:text-gray-300">
+                            Visit {{ group ? group.name : brand?.name }}'s website
+                        </a>
+                    </p>
+                    <p *ngIf="brand" class="text-lg">
+                        <strong>Phone:</strong> {{ brand.cellPhone }}
+                    </p>
+                    <p *ngIf="brand" class="text-lg">
+                        <strong>Group: </strong>
+                        <a href="{{ '/groupdetails/group/' + brand.group.id }}" class="underline hover:text-gray-300">
+                            {{ brand.group.name }}
+                        </a>
+                    </p>
+                </div>
+
+                <div class="flex justify-end">
+                    <img class="rounded-xl shadow-xl h-64 w-auto object-contain bg-slate-100"
+                        [src]="group ? baseURL + group.headquarters : baseURL + brand?.logo"
+                        [alt]="group ? group.name : brand?.name" />
+                </div>
+            </div>
+
+            <div *ngIf="brand" class="border-4 border-white rounded-2xl text-white px-6 py-4 mt-10">
+                <p class="text-base">
+                    <strong>Description:</strong> {{ brand.description }}
+                </p>
+            </div>
+        </div>
+
+        <ng-container *ngIf="group">
+            <div class="p-10">
+                <h2 class="text-3xl text-white font-bold mb-8">Brands</h2>
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-center items-center">
+                    <div class="bg-white rounded-2xl shadow-md w-72 h-68 overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl mx-auto"
+                        *ngFor="let brand of group.brands">
+                        <app-brands-and-groups-cards [brand]="brand"></app-brands-and-groups-cards>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="brand">
+            <ng-container *ngIf="cars.length > 0">
+                <div class="p-10">
+                    <h2 class="text-3xl text-white font-bold mb-8">Cars</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+                        <app-cards-and-motos-brands-card *ngFor="let car of cars" [item]="car" type="car"
+                            class="mx-auto">
+                        </app-cards-and-motos-brands-card>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="motos.length > 0">
+                <div class="p-10">
+                    <h2 class="text-3xl text-white font-bold mb-8">Motos</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+                        <app-cards-and-motos-brands-card *ngFor="let moto of motos" [item]="moto" type="moto"
+                            class="mx-auto">
+                        </app-cards-and-motos-brands-card>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

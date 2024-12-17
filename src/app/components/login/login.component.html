@@ -1,0 +1,56 @@
+<div
+    class="font-[sans-serif] bg-gradient-to-r from-slate-900 to-slate-700 text-gray-800 min-h-screen flex flex-col items-center justify-center lg:p-6 p-4">
+    <a routerLink="/" class="absolute top-4 left-4 flex items-center space-x-2 group">
+        <app-go-back></app-go-back>
+    </a>
+
+    <div class="grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full">
+        <div>
+            <div class="flex items-center space-x-2">
+                <a routerLink="/">
+                    <img src="../../../assets/logo-removebg-preview.png" alt="logo" class="w-20 h-20 md:w-32 md:h-32" />
+                </a>
+                <h1 class="text-6xl font-extrabold mb-6 lg:leading-[50px] text-white">
+                    <a routerLink="/">
+                        CarStand
+                    </a>
+                </h1>
+            </div>
+            <h4 class="text-xl ml-6 font-bold text-white">Drive into your next adventure – login to explore the finest
+                cars!</h4>
+        </div>
+
+        <form class="bg-white rounded-xl px-6 py-8 space-y-6 max-w-md md:ml-auto w-full">
+            <h3 class="text-3xl font-extrabold mb-12">
+                Login
+            </h3>
+
+            <div class="mb-4">
+                <p class="text-black">Username</p>
+                <input type="text" [(ngModel)]="username" name="email" class="w-full bg-lightgrey p-2 rounded-lg mt-1"
+                    placeholder="Enter your username" />
+            </div>
+
+            <div class="mb-4">
+                <p class="text-black">Password</p>
+                <input type="password" [(ngModel)]="password" name="password"
+                    class="w-full bg-lightgrey p-2 rounded-lg mt-1" placeholder="Enter your password" />
+            </div>
+
+            <div *ngIf="errorMessage" class="text-red-700 px-3 py-2 rounded relative" role="alert">
+                <span class="block sm:inline">{{ errorMessage }}</span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 mt-6">
+                <button type="submit" (click)="onLogin()"
+                    class="w-32 text-center shadow-xl py-3 px-6 text-sm font-semibold rounded-md text-white bg-gray-800 hover:bg-[#222] focus:outline-none">
+                    Log in
+                </button>
+                <button class="text-sm text-blue">
+                    <a routerLink="/signup" class="text-blue font-semibold underline ml-1">You don't have an
+                        account?</a>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
